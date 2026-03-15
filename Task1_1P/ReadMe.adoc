@@ -1,0 +1,28 @@
+:Author: owen_costin
+:Email:
+:Date: 12/03/2026
+:Revision: version#
+:License: Public Domain
+
+= Project: 30/20 Light Project
+
+== Step 1: Installation
+
+Download files here
+
+== Step 2: Assemble the circuit
+
+Assemble the circuit following the diagram shown in schematic on submission
+
+== Step 3: Load the code
+
+Verify and then upload the code contained in this sketch on to your board
+
+== Step 4:
+
+Using cloud functionality for arduino, in the dashboard (if connected) flip the switch and watch the light's
+
+
+== EXPLANATION
+
+In this program the hallway and porch lights are defined as pins 7 and 5 from my arduino board. onSwitchChange function was auto generated when I setup this project it's called when the variable related as defined in thingProperties changes. So when switch is flicked hallway and porch lights are set to high, then immediately I record when the both lights should shut off and put switch back to false. While running the loop checks cloud continuously and if the times have met what's defined they will be set to low... done

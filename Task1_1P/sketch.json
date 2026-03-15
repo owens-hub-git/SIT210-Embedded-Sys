@@ -1,0 +1,9 @@
+{
+  "cpu": {
+    "fqbn": "arduino:samd:nano_33_iot",
+    "name": "",
+    "type": "serial"
+  },
+  "secrets": [],
+  "included_libs": []
+}
