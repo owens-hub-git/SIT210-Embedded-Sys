@@ -24,5 +24,3 @@ float getTemp() {
 
   return t;
 }
-
-void 

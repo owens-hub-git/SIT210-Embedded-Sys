@@ -1,17 +1,11 @@
 #include <WiFiNINA.h>
 #include "secrets.h"
 #include "ThingSpeak.h" // always include thingspeak header file after other header files and custom macros
-//light sensor
-#include <BH1750.h>
-#include <Wire.h>
 
 //dht stuff
 #include "DHT.h"
 #define DHTPIN 2
 #define DHTTYPE DHT11
-
-//light sensor
-BH1750 lightMeter(0x23);
 
 //dht vars
 DHT dht(DHTPIN, DHTTYPE);
@@ -24,8 +18,12 @@ WiFiClient  client;
 unsigned long myChannelNumber = SECRET_CH_ID;
 const char * myWriteAPIKey = SECRET_WRITE_APIKEY;
 
+//light vars
+const int lightPin = A0;
+int lightValue = 0;
+
+//temp var
 float temperature = 0;
-float light = 0;
 
 void setup() {
   Serial.begin(115200);  // Initialize serial
@@ -58,11 +56,11 @@ void loop() {
 
   //get values
   temperature = getTemp();
-  light = getLightL();
+  lightValue = getLightL();
 
   //setfields
   ThingSpeak.setField(1, temperature);
-  ThingSpeak.setField(2, light);
+  ThingSpeak.setField(2, lightValue);
 
   //write to fields
   writeToFields();
