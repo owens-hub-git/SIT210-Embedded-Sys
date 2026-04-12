@@ -20,18 +20,29 @@ class MyWindow(QMainWindow):
         self.initUI()
 
     def initUI(self):
-        self.rb1 = QRadioButton("Hallway", self)
+        self.pb1 = QtWidgets.QPushButton(self)
+        self.pb1.setText("Exit")
+        self.pb1.move(50,200)
+        self.pb1.clicked.connect(self.exit_button_click)
+
+        self.rb1 = QtWidgets.QRadioButton(self)
+        self.rb1.setText("Hallway")
         self.rb1.move(50,50)
         self.rb1.toggled.connect(self.radio_selected)
 
-        self.rb2 = QRadioButton("Bathroom", self)
+        self.rb2 = QtWidgets.QRadioButton(self)
+        self.rb2.setText("Bathroom")
         self.rb2.move(50,100)
         self.rb2.toggled.connect(self.radio_selected)
         
-        self.rb3 = QRadioButton("Closet", self)
+        self.rb3 = QtWidgets.QRadioButton(self)
+        self.rb3.setText("Closet")
         self.rb3.move(50,150)
         self.rb3.toggled.connect(self.radio_selected)
    
+    def exit_button_click(self):
+        self.close()
+
     def radio_selected(self):
         selected = self.sender()
         
@@ -49,6 +60,9 @@ class MyWindow(QMainWindow):
                 GPIO.output(led_closet, GPIO.HIGH)
 
     def closeEvent(self, event):
+        GPIO.output(led_hallway, GPIO.LOW)
+        GPIO.output(led_bathroom, GPIO.LOW)
+        GPIO.output(led_closet, GPIO.LOW)
         GPIO.cleanup()
         event.accept()
 
