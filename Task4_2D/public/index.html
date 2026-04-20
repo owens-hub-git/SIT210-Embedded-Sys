@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container text-center" style="max-width: 400px;">
+        <div class="row align-items-start m-2">
+            <div class="col">
+                <button onclick="toggle('led1', true)">Living Room ON</button>
+            </div>
+            <div class="col">
+                <button onclick="toggle('led1', false)">Living Room OFF</button>
+            </div>
+        </div>
+        <div class="row align-items-start m-2">
+            <div class="col">
+                <button onclick="toggle('led2', true)">Bathroom ON</button>
+            </div>
+            <div class="col">
+                <button onclick="toggle('led2', false)">Bathroom OFF</button>
+            </div>
+        </div>
+        <div class="row align-items-start m-2">
+            <div class="col">
+                <button onclick="toggle('led3', true)">Closet ON</button>
+            </div>
+            <div class="col">
+                <button onclick="toggle('led3', false)">Closet OFF</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let busy = false;
+
+        async function toggle(led, state) {
+            if (busy) return;
+
+            busy = true;
+
+            try {
+                await fetch("/led", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ led, state })
+                });
+            } finally {
+                setTimeout(() => {
+                    busy = false;
+                }, 300);
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+</body>
+</html>
