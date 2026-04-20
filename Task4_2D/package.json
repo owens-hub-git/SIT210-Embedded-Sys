@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@arduino/arduino-iot-client": "^3.0.0",
+    "express": "^5.2.1"
+  }
+}
